@@ -1,0 +1,19 @@
+package entities;
+
+public final class Location {
+    private final float latitude;
+    private final float longitude;
+
+    public Location(float latitude, float longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return this.latitude;
+    }
+
+    public float getLongitude() {
+        return this.longitude;
+    }
+}
