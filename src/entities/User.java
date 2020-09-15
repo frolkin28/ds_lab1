@@ -1,20 +1,24 @@
 package entities;
 
 
-public final class Driver {
+public final class User {
     private String api_key;
     private final String first_name;
     private final String last_name;
-    private final String car_number;
+    private final String email;
 
-    public Driver(String first_name, String last_name, String car_number) {
+    public User(String first_name, String last_name, String email) {
         this.first_name = first_name;
         this.last_name = last_name;
-        this.car_number = car_number;
+        this.email = email;
     }
 
     public String getApi_key() {
         return api_key;
+    }
+
+    public void setApi_key(String key) {
+        this.api_key = key;
     }
 
     public String getFirst_name() {
@@ -25,11 +29,7 @@ public final class Driver {
         return last_name;
     }
 
-    public String getCar_number() {
-        return car_number;
-    }
-
-    public void setApi_key(String key) {
-        this.api_key = key;
+    public String getEmail() {
+        return email;
     }
 }
