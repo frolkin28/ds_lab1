@@ -8,9 +8,9 @@ import storages.DriverStorage;
 import storages.UserStorage;
 
 public class RegistrationService {
-    private ValidationService validation_service = new ValidationService();
-    private UserStorage user_storage = new UserStorage();
-    private DriverStorage driver_storage = new DriverStorage();
+    private final ValidationService validation_service = new ValidationService();
+    private final UserStorage user_storage = new UserStorage();
+    private final DriverStorage driver_storage = new DriverStorage();
 
     public void registerUser(User user) {
         try {

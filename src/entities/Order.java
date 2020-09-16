@@ -1,7 +1,6 @@
 package entities;
 
 import java.util.UUID;
-import services.CostService;
 
 public final class Order {
     private final String uuid;

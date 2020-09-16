@@ -1,6 +1,5 @@
 package storages;
 
-import entities.Driver;
 import entities.User;
 
 import java.util.HashMap;
