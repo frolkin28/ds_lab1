@@ -2,19 +2,16 @@ package entities;
 
 
 public final class Driver {
-    private String api_key;
     private final String first_name;
     private final String last_name;
     private final String car_number;
+    private final String password;
 
-    public Driver(String first_name, String last_name, String car_number) {
+    public Driver(String first_name, String last_name, String car_number, String password) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.car_number = car_number;
-    }
-
-    public String getApi_key() {
-        return api_key;
+        this.password = password;
     }
 
     public String getFirst_name() {
@@ -29,7 +26,7 @@ public final class Driver {
         return car_number;
     }
 
-    public void setApi_key(String key) {
-        this.api_key = key;
+    public String getPassword() {
+        return password;
     }
 }

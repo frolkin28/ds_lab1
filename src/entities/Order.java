@@ -9,22 +9,21 @@ public final class Order {
     private final Location from;
     private final Location destination;
     private final double cost;
-    private Status status;
+    private OrderStatus status;
 
-    public Order(Location from, Location destination) {
+    public Order(Location from, Location destination, double cost) {
         this.uuid = UUID.randomUUID().toString();
-        this.driver = null;
         this.from = from;
         this.destination = destination;
-        this.cost = CostService.calculate(this.from, this.destination);
-        this.status = Status.AVAILABLE;
+        this.cost = cost;
+        this.status = OrderStatus.AVAILABLE;
     }
 
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 

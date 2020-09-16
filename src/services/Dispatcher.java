@@ -3,31 +3,34 @@ package services;
 import entities.Driver;
 import entities.Location;
 import entities.Order;
-import entities.Status;
+import entities.OrderStatus;
+import storages.OrdersLogStorage;
 
 public final class Dispatcher {
-    private final OrdersQueue queue_service;
+    private final OrdersQueue queue_service = new OrdersQueue();
+    private final CostService cost_service = new CostService();
+    private final OrdersLogStorage orders_log_storage = new OrdersLogStorage();
 
-    public Dispatcher() {
-        this.queue_service = new OrdersQueue();
+    public Order getOrder(Driver driver) {
+        Order order = queue_service.pop();
+        order.setDriver(driver);
+        System.out.printf("Order %s was sent to a driver\n", order.getUuid());
+        order.setStatus(OrderStatus.PROCESSING);
+        orders_log_storage.update(order);
+        return order;
     }
 
-//    public Order getOrder(Driver driver) {
-//        Order order = this.queue_service.pop();
-//        order.setDriver(driver);
-//        System.out.printf("Order %s was sent to a driver %s\n", order.getUuid(), driver.getUuid());
-//        order.setStatus(Status.PROCESSING);
-//        return order;
-//    }
-//
-//    public void completeOrder(Order order) {
-//        System.out.printf("Order %s is complete\n", order.getUuid());
-//        order.setStatus(Status.COMPLETE);
-//    }
-//
-//    public void createOrder(Location from, Location destination) {
-//        Order order = new Order(from, destination);
-//        System.out.printf("Order %s created, it will cost %f\n", order.getUuid(), order.getCost());
-//        this.queue_service.push(order);
-//    }
+    public void completeOrder(Order order) {
+        System.out.printf("Order %s is complete\n", order.getUuid());
+        order.setStatus(OrderStatus.COMPLETE);
+        orders_log_storage.update(order);
+    }
+
+    public void createOrder(Location from, Location destination) {
+        double cost = cost_service.calculate(from, destination);
+        Order order = new Order(from, destination, cost);
+        System.out.printf("Order %s created, it will cost %f\n", order.getUuid(), order.getCost());
+        queue_service.push(order);
+        orders_log_storage.add(order);
+    }
 }
